@@ -1,0 +1,23 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - main
+
+pr:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - script: |
+      php --version
+      find . -name "*.php" -type f
+    displayName: 'Check PHP Environment and Files'
+
+  - script: |
+      find . -name "*.php" -type f -print0 | xargs -0 -r -n1 php -l
+    displayName: 'Validate PHP Syntax'
